@@ -130,4 +130,4 @@ def name_to_coords(obj_name):
     coords = coords.to_string('decimal').split(' ')
     coords = [float(i) for i in coords]
 
-    return coords[0], coords[1]
+    return tuple(coords)
