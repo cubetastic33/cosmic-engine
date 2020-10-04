@@ -83,8 +83,8 @@ def catalog_search(search_term, service, cap=math.inf):
 
     Parameters:
     - search_term: Search string provided by user [str]
-    - service: SCS, SIAP, or SSA
-    - cap: Maximum number of catalogs to return
+    - service: SCS, SIAP, or SSA [str]
+    - cap: Maximum number of catalogs to return [int] (Optional)
 
     Returns:
     - JSON string with all catalogs that match search parameters [str]
