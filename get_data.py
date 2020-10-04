@@ -1,5 +1,6 @@
 import re
 import json
+import math
 import requests
 import numpy as np
 import pandas as pd
@@ -75,14 +76,15 @@ def service_heasarc(service, SoT_name, RA, DEC, SR):
 
     return pd.DataFrame(data=rows, columns=col_names), col_info, fetch_url
 
-def catalog_search(search_term, service):
+def catalog_search(search_term, service, cap=math.inf):
 
     """
     Returns JSON string containing all catalogs that match search parameters
 
     Parameters:
     - search_term: Search string provided by user [str]
-    - service: SCS, SIAP, or SSA
+    - service: SCS, SIAP, or SSA [str]
+    - cap: Maximum number of catalogs to return [int] (Optional)
 
     Returns:
     - JSON string with all catalogs that match search parameters [str]
@@ -103,6 +105,9 @@ def catalog_search(search_term, service):
             search_term in i['desc'].lower().strip()):
 
             refined_catalogs.append(i)
+
+        if len(refined_catalogs) >= cap:
+            break
 
     if refined_catalogs == []:
         return None
