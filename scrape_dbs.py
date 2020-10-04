@@ -28,11 +28,14 @@ for service in ['SCS', 'SIAP', 'SSA']:
         url += '&page=' + str(page + 1)
         url += '&per_page=100&q=nasa.heasarc&search_field=id_text'
 
+        # Fetch the webpage and parse
         r = requests.get(url)
         soup = BeautifulSoup(r.content, 'html5lib')
 
+        # Find all catalog <dl>
         dataset_dls = soup.findAll('dl', {'class' : 'document-metadata dl-horizontal dl-invert'})
 
+        # Loop through all catalogs
         for dataset_dl in dataset_dls:
 
             dataset_id = dataset_dl.findAll('dd', {'class' : 'blacklight-id'})[0].get_text()
@@ -51,4 +54,5 @@ for service in ['SCS', 'SIAP', 'SSA']:
 
     print('Completed webscraping for service ' + service + '.          ')
 
+# Dump to pickle file
 pkl.dump(datasets, open('datasets_info.pkl', 'wb'))

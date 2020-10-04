@@ -1,4 +1,5 @@
 import re
+import json
 import requests
 import numpy as np
 import pandas as pd
@@ -6,33 +7,6 @@ import pickle as pkl
 import xml.etree.ElementTree as ET
 
 from astropy.coordinates import SkyCoord
-
-def catalog_search(search_term):
-
-    pass
-
-def name_to_coords(obj_name):
-
-    """
-    Returns right ascension and declination.
-
-    Parameter:
-    - obj_name: Name of astronomical object [str]
-
-    Returns:
-    - Right Ascension [float]
-    - Declination [float]
-    """
-
-    try:
-        coords = SkyCoord.from_name(obj_name)
-    except:
-        return None
-
-    coords = coords.to_string('decimal').split(' ')
-    coords = [float(i) for i in coords]
-
-    return coords[0], coords[1]
 
 def service_heasarc(service, SoT_name, RA, DEC, SR):
 
@@ -100,3 +74,60 @@ def service_heasarc(service, SoT_name, RA, DEC, SR):
         rows = row if rows is None else np.concatenate((rows, row), axis=0)
 
     return pd.DataFrame(data=rows, columns=col_names), col_info, fetch_url
+
+def catalog_search(search_term, service):
+
+    """
+    Returns JSON string containing all catalogs that match search parameters
+
+    Parameters:
+    - search_term: Search string provided by user [str]
+    - service: SCS, SIAP, or SSA
+
+    Returns:
+    - JSON string with all catalogs that match search parameters [str]
+    """
+
+    service = service.upper()
+    if service not in ['SCS', 'SIAP', 'SSA']:
+        return None
+
+    catalogs = pkl.load(open('datasets_info.pkl', 'rb'))[service]
+    search_term = search_term.lower().strip()
+    refined_catalogs = []
+
+    for i in catalogs:
+
+        if (search_term in i['name'].lower().strip() or
+            search_term in i['short-name'].lower().strip() or
+            search_term in i['desc'].lower().strip()):
+
+            refined_catalogs.append(i)
+
+    if refined_catalogs == []:
+        return None
+
+    return json.dumps(refined_catalogs)
+
+def name_to_coords(obj_name):
+
+    """
+    Returns right ascension and declination.
+
+    Parameter:
+    - obj_name: Name of astronomical object [str]
+
+    Returns:
+    - Right Ascension [float]
+    - Declination [float]
+    """
+
+    try:
+        coords = SkyCoord.from_name(obj_name)
+    except:
+        return None
+
+    coords = coords.to_string('decimal').split(' ')
+    coords = [float(i) for i in coords]
+
+    return coords[0], coords[1]
