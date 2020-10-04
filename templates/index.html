@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ontic 42</title>
+    <title>Cosmic Engine</title>
     <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
     <header>
+        <div id="time"></div>
         <div>
             <button>VO Service</button>
         </div>
+        <h1>Cosmic Engine</h1>
     </header>
     <div id="search-dialog">
         <button id="close">x</button>
@@ -29,8 +31,8 @@
         <div id="search">
             <button id="back-to-results" class="back">←</button>
             <div class="input">
-                <label for="search-bar">Search Radius:</label>
-                <input id="search-bar" type="text">
+                <label for="search-radius">Search Radius:</label>
+                <input id="search-radius" type="text">
             </div>
             <br>
             <hr>
@@ -38,8 +40,8 @@
                 <h2 class="exception">Search by name</h2>
                 <br>
                 <div class="input">
-                    <label for="search-bar">Name:</label>
-                    <input id="search-bar" type="text">
+                    <label for="name">Name:</label>
+                    <input id="name" type="text">
                 </div>
                 <button id="name-search">Search</button>
             </div>
@@ -47,17 +49,18 @@
             <div class="bar">
                 <h2>Search by coordinates</h2>
                 <div class="input">
-                    <label for="search-bar">Right Ascension:</label>
-                    <input id="search-bar" type="text">
+                    <label for="right-ascension">Right Ascension:</label>
+                    <input id="right-ascension" type="text">
                 </div>
                 <br>
                 <div class="input">
-                    <label for="search-bar">Declination:</label>
-                    <input id="search-bar" type="text">
+                    <label for="declination">Declination:</label>
+                    <input id="declination" type="text">
                 </div>
                 <button id="coordinates-search">Search</button>
             </div>
         </div>
+        <div id="catalog"></div>
     </div>
     <div id="demo"></div>
 </body>

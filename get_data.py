@@ -79,6 +79,7 @@ def service_heasarc(service, SoT_name, RA, DEC, SR):
 
     return pd.DataFrame(data=rows, columns=col_names), col_info, fetch_url
 
+
 def catalog_search(search_term, service, cap=math.inf):
 
     """
@@ -112,9 +113,9 @@ def catalog_search(search_term, service, cap=math.inf):
             break
 
     if refined_catalogs == []:
-        return ""
+        return None
 
-    return json.dumps(refined_catalogs[:20])
+    return refined_catalogs
 
 
 def name_to_coords(obj_name):
@@ -133,7 +134,7 @@ def name_to_coords(obj_name):
     try:
         coords = SkyCoord.from_name(obj_name)
     except:
-        return None
+        return (None, None)
 
     coords = coords.to_string('decimal').split(' ')
     coords = [float(i) for i in coords]

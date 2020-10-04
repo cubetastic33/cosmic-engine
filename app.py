@@ -18,7 +18,52 @@ def fetch_catalogs():
         "Simple Image Access Protocol": "SIAP",
         "Simple Spectral Access": "SSA"
     }[request.form["service"]]
-    return get_data.catalog_search(request.form["search_term"], service)
+    results = get_data.catalog_search(request.form["search_term"], service, 20) or ""
+    return json.dumps(results)
+
+
+@app.route("/name_search", methods=["POST"])
+def name_search():
+    service = {
+        "Simple Cone Search": "SCS",
+        "Simple Image Access Protocol": "SIAP",
+        "Simple Spectral Access": "SSA"
+    }[request.form["service"]]
+    ra, dec = get_data.name_to_coords(request.form["name"])
+    if ra is None:
+        # If ra is None, dec is also None, and it means the name was invalid
+        return json.dumps("")
+    results = get_data.service_heasarc(service, request.form["id"], ra, dec, request.form["search_radius"])
+    if results is not None:
+        results = list(results)
+        first_column = {}
+        key = results[0].columns[0] if results[1] == {} else results[1][results[0].columns[0]]["desc"]
+        first_column[key] = results[0][results[0].columns[0]].to_list()
+        results[0] = results[0].to_json()
+        results.append(first_column)
+    else:
+        results = ""
+    return json.dumps(results)
+
+
+@app.route("/coordinates_search", methods=["POST"])
+def coordinates_search():
+    service = {
+        "Simple Cone Search": "SCS",
+        "Simple Image Access Protocol": "SIAP",
+        "Simple Spectral Access": "SSA"
+    }[request.form["service"]]
+    results = get_data.service_heasarc(service, request.form["id"], request.form["ra"], request.form["dec"], request.form["search_radius"])
+    if results is not None:
+        results = list(results)
+        first_column = {}
+        key = results[0].columns[0] if results[1] == {} else results[1][results[0].columns[0]]["desc"]
+        first_column[key] = results[0][results[0].columns[0]].to_list()
+        results[0] = results[0].to_json()
+        results.append(first_column)
+    else:
+        results = ""
+    return json.dumps(results)
 
 
 @app.route("/scripts/<path:path>")

@@ -1,4 +1,6 @@
-html{
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap');
+
+html {
     margin: 0;
     padding: 0;      
     text-align: center;
@@ -28,6 +30,22 @@ header div {
     height: 100%;
 }
 
+header h1, #time {
+    color: #FFFFFF;
+    font-family: "Tajawal", sans-serif;
+    margin: 0;
+    position: absolute;
+    top: .3em;
+    right: .5em;
+    font-size: 30px;
+}
+
+#time {
+    left: 1em;
+    right: auto;
+    font-size: 18px;
+}
+
 header div button {
     background-color: #FFFFFF44;
     color: #FFFFFF;
@@ -38,6 +56,11 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+button:disabled {
+    opacity: .75;
+    cursor: default;
 }
 
 #search-dialog {
@@ -67,7 +90,7 @@ button {
     width: 100%;
 }
 
-#search, #results {
+#search, #results, #catalog {
     display: none;
 }
 
@@ -150,7 +173,7 @@ h2.exception {
     margin: auto;
 }
 
-#results {
+#results, #catalog {
     color: #FFFFFF;
     text-align: left;
     font-family: sans-serif;
@@ -178,6 +201,10 @@ h2.exception {
 .result p {
     margin: .25em 0;
     font-size: .9em;
+}
+
+table {
+    margin-left: 2em;
 }
 
 #demo {
