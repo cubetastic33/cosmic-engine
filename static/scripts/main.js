@@ -209,22 +209,74 @@ $("#close").click(function() {
     $("#search-dialog").hide();
 });
 
-$("#buttons button").click(function() {
-    $.post("/search_catalogs", { type: $(this).text(), query: "" }).done(function(result) {
-        // TODO Populate #results with results
+function search_catalogs() {
+    var search_term = $("#catalog-search").val();
+    $.post("/search_catalogs", { search_term: search_term, service: $("#results").attr("data-service") }).done(function(results) {
+        console.log(results);
+        $("#results").html(`<button id="back-to-buttons" class="back">←</button>
+            <div id="catalog-search-bar">
+                <input id="catalog-search" type="text">
+                <button>search</button>
+            </div>`);
+        $("#catalog-search").val(search_term);
+
+        $("#back-to-buttons").click(() => {
+            $("#results").hide();
+            $("#buttons").show();
+        });
+
+        $("#catalog-search").keyup(e => {
+            if (e.keyCode === 13) {
+                search_catalogs();
+            }
+        });
+
+        $("#catalog-search-bar button").click(search_catalogs);
+
         $("#buttons").hide();
         $("#results").show();
+        $("#catalog-search").focus();
+
+        if (!results) {
+            $("#results").append("<br><p style=\"text-align: center\">No results</p>");
+            return;
+        }
+
+        results = JSON.parse(results);
+        for (var i = 0; i < results.length; i++) {
+            $("#results").append(`<div class="result">
+                <h3>${i + 1}. ${results[i]["name"]}</h3>
+                <p>
+                    <b>ID:</b> ${results[i]["id"]}
+                </p>
+                <p>
+                    <b>Title:</b> ${results[i]["name"]}
+                </p>
+                <p>
+                    <b>Short Name:</b> ${results[i]["short-name"]}
+                </p>
+                <p>
+                    <b>Date:</b> ${results[i]["date"]}
+                </p>
+                <p>
+                    <b>Publisher:</b> ${results[i]["publisher"]}
+                </p>
+                <p>
+                    <b>Description:</b> ${results[i]["desc"]}
+                </p>
+            </div>`);
+        }
     });
+}
+
+$("#buttons button").click(function() {
+    $("#results").attr("data-service", $(this).text());
+    search_catalogs();
 });
 
 $(".result").click(function() {
     $("#results").hide();
     $("#search").show();
-});
-
-$("#back-to-buttons").click(function() {
-    $("#results").hide();
-    $("#buttons").show();
 });
 
 $("#back-to-results").click(function() {

@@ -1,5 +1,7 @@
 import json
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, send_from_directory, request
+
+import get_data
 
 app = Flask(__name__)
 
@@ -11,7 +13,12 @@ def index():
 
 @app.route("/search_catalogs", methods=["POST"])
 def fetch_catalogs():
-    return json.dumps([{"catalog_id": "foo", "title": "bar"}])
+    service = {
+        "Simple Cone Search": "SCS",
+        "Simple Image Access Protocol": "SIAP",
+        "Simple Spectral Access": "SSA"
+    }[request.form["service"]]
+    return get_data.catalog_search(request.form["search_term"], service)
 
 
 @app.route("/scripts/<path:path>")

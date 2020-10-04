@@ -113,6 +113,13 @@ h2.exception {
     min-width: 50%;
 }
 
+#catalog-search-bar button {
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    padding: 7.5px 12.5px;
+}
+
 .bar button {
     padding: 10px 15px;
 }

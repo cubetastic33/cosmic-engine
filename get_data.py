@@ -99,7 +99,6 @@ def catalog_search(search_term, service, cap=math.inf):
     refined_catalogs = []
 
     for i in catalogs:
-
         if (search_term in i['name'].lower().strip() or
             search_term in i['short-name'].lower().strip() or
             search_term in i['desc'].lower().strip()):
@@ -110,9 +109,9 @@ def catalog_search(search_term, service, cap=math.inf):
             break
 
     if refined_catalogs == []:
-        return None
+        return ""
 
-    return json.dumps(refined_catalogs)
+    return json.dumps(refined_catalogs[:20])
 
 def name_to_coords(obj_name):
 
