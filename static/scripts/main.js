@@ -219,7 +219,7 @@ $("#coordinates-search").click(() => {
         service: $("#results").attr("data-service"),
         id: $("#search").attr("data-id"),
         ra: $("#right-ascension").val(),
-        declination: $("#declination").val(),
+        dec: $("#declination").val(),
         search_radius: $("#search-radius").val(),
     }).done(results => {
         render_catalog(results);
