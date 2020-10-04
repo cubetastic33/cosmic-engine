@@ -270,6 +270,7 @@ function render_catalog(results) {
         for (var i = 0; i < keys.length; i++) {
             $("#catalog-result ul").append(`<li><b>${keys[i]}:</b> ${results[0][keys[i]][index]}</li>`);
         }
+        $("#catalog-result").append(`<img src="${results[0]["URL"][index]}" alt="image">`);
     });
 }
 
