@@ -1,16 +1,16 @@
 import re
 import json
 import math
+import pickle as pkl
+import xml.etree.ElementTree as ET
 import requests
 import numpy as np
 import pandas as pd
-import pickle as pkl
-import xml.etree.ElementTree as ET
 
 from astropy.coordinates import SkyCoord
 
-def service_heasarc(service, SoT_name, RA, DEC, SR):
 
+def service_heasarc(service, SoT_name, RA, DEC, SR):
     """
     Returns data from HEASARC provided search paramters.
 
@@ -115,6 +115,7 @@ def catalog_search(search_term, service, cap=math.inf):
         return ""
 
     return json.dumps(refined_catalogs[:20])
+
 
 def name_to_coords(obj_name):
 
