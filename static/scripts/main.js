@@ -210,8 +210,11 @@ $("#close").click(function() {
 });
 
 $("#buttons button").click(function() {
-    $("#buttons").hide();
-    $("#results").show();
+    $.post("/fetch_catalogs", { type: $(this).text() }).done(function(result) {
+        // TODO Populate #results with results
+        $("#buttons").hide();
+        $("#results").show();
+    });
 });
 
 $(".result").click(function() {

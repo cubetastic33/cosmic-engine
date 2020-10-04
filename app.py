@@ -1,3 +1,4 @@
+import json
 from flask import Flask, render_template, send_from_directory
 
 app = Flask(__name__)
@@ -6,6 +7,10 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     return send_from_directory("templates", "index.html")
+
+@app.route("/fetch_catalogs", methods=["POST"])
+def fetch_catalogs():
+    return json.dumps([{ catalog_id: "foo", title: "bar" }])
 
 
 @app.route("/scripts/<path:path>")
