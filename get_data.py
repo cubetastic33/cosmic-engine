@@ -47,8 +47,11 @@ def service_heasarc(service, SoT_name, RA, DEC, SR):
         return None
 
     # Perform query, recieve XML file and parse
-    xml_dat = requests.get(fetch_url)
-    xml_root = ET.fromstring(xml_dat.content)[0][service_format_idx]
+    try:
+        xml_dat = requests.get(fetch_url)
+        xml_root = ET.fromstring(xml_dat.content)[0][service_format_idx]
+    except:
+        return None
 
     col_names, col_info = [], {}
     rows = None
