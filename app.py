@@ -10,7 +10,7 @@ def index():
 
 @app.route("/fetch_catalogs", methods=["POST"])
 def fetch_catalogs():
-    return json.dumps([{ catalog_id: "foo", title: "bar" }])
+    return json.dumps([{"catalog_id": "foo", "title": "bar"}])
 
 
 @app.route("/scripts/<path:path>")
