@@ -17,15 +17,19 @@ def name_to_coords(obj_name):
     Returns right ascension and declination.
 
     Parameter:
-    - obj_name: Name of astronomical object
+    - obj_name: Name of astronomical object [str]
 
     Returns:
-    - Right Ascension
-    - Declination
+    - Right Ascension [float]
+    - Declination [float]
     """
 
-    coords = SkyCoord.from_name(obj_name)
-    coords = coords.to_string('decimal').sep(' ')
+    try:
+        coords = SkyCoord.from_name(obj_name)
+    except:
+        return None
+
+    coords = coords.to_string('decimal').split(' ')
     coords = [float(i) for i in coords]
 
     return coords[0], coords[1]
@@ -45,7 +49,7 @@ def service_heasarc(service, SoT_name, RA, DEC, SR):
     Returns:
     - Pandas DataFrame with all the data [pandas.DataFrame]
     - Column info dictionary with additional information on each column [dict]
-    - URL source of XML file
+    - URL source of XML file [str]
     """
 
     service = service.upper()
@@ -96,7 +100,3 @@ def service_heasarc(service, SoT_name, RA, DEC, SR):
         rows = row if rows is None else np.concatenate((rows, row), axis=0)
 
     return pd.DataFrame(data=rows, columns=col_names), col_info, fetch_url
-
-if __name__ == "__main__":
-
-    print(name_to_coords('m51'))
