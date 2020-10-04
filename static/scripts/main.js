@@ -218,3 +218,13 @@ $(".result").click(function() {
     $("#results").hide();
     $("#search").show();
 });
+
+$("#back-to-buttons").click(function() {
+    $("#results").hide();
+    $("#buttons").show();
+});
+
+$("#back-to-results").click(function() {
+    $("#search").hide();
+    $("#results").show();
+});

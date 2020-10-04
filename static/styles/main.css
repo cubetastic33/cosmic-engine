@@ -96,13 +96,21 @@ h2.exception {
     font-family: sans-serif;
 }
 
-.input input {
+.input input, #catalog-search {
     background: transparent;
     border: 2px solid #FFFFFF;
     border-radius: 4px;
     color: #FFFFFF;
     padding: 5px;
     margin: 0 5px;
+}
+
+#catalog-search-bar {
+    text-align: center;
+}
+
+#catalog-search {
+    min-width: 50%;
 }
 
 .bar button {
