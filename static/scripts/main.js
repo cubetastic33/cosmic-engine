@@ -160,7 +160,7 @@ function search_catalogs() {
                     <b>Publisher:</b> ${results[i]["publisher"]}
                 </p>
                 <p>
-                    <b>Description:</b> ${results[i]["desc"]}
+                    <b>Description:</b> ${results[i]["desc"].replaceAll("&lt;", "<").replaceAll("&gt;", ">")}
                 </p>
             </div>`);
         }
@@ -248,12 +248,13 @@ function render_catalog(results) {
         return;
     }
 
+    console.log(results);
     results[0] = JSON.parse(results[0]);
     $("#catalog").attr("data-results", JSON.stringify(results));
     console.log(results);
 
     var key = Object.keys(results[3])[0];
-    $("#catalog").append(`<table><thead><tr><th>Displayed: ${key}</th></thead><tbody></tbody></table>`);
+    $("#catalog").append(`<a href="${results[2]}">Download raw XML</a><br><br><table><thead><tr><th>Displayed: ${key}</th></thead><tbody></tbody></table>`);
 
     for (var i = 0; i < results[3][key].length; i++) {
         $("#catalog tbody").append(`<tr><td data-index="${i}">${results[3][key][i]}</td></tr>`);
@@ -262,10 +263,10 @@ function render_catalog(results) {
     $("#catalog td").click(function() {
         $("#catalog-result").show();
         var results = JSON.parse($("#catalog").attr("data-results"));
-        console.log("fewfwefwe", results);
         var index = $(this).attr("data-index");
         var keys = Object.keys(results[0]);
-        $("#catalog-result").html(`<button id="close-catalog-result" class="close">x</button><ul></ul>`);
+        $("#catalog-result").html(`<button id="close-catalog-result" class="close">x</button>
+            <ul></ul>`);
         $("#close-catalog-result").click(() => $("#catalog-result").hide());
         for (var i = 0; i < keys.length; i++) {
             $("#catalog-result ul").append(`<li><b>${keys[i]}:</b> ${results[0][keys[i]][index]}</li>`);

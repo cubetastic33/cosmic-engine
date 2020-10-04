@@ -208,8 +208,13 @@ h2.exception {
     margin: 0;
 }
 
-.result a {
-    color: #8FBFF7;
+.result a, #catalog a {
+    color: #8FBFF7 !important;
+}
+
+.result pre {
+    font-size: .8em;
+    overflow: auto;
 }
 
 .result p {
