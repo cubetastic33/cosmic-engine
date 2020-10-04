@@ -215,7 +215,7 @@ $("#coordinates-search").click(() => {
     $("#name-search").prop("disabled", true);
     $("#coordinates-search").prop("disabled", true);
 
-    $.post("/name_search", {
+    $.post("/coordinates_search", {
         service: $("#results").attr("data-service"),
         id: $("#search").attr("data-id"),
         ra: $("#right-ascension").val(),
