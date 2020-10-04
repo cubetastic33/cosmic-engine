@@ -100,11 +100,11 @@ function render() {
 
 $("header button").click(function() {
     $("#search-dialog").show();
-    $("header div").hide();
+    $("header button").hide();
 });
 
 $("#close").click(function() {
-    $("header div").show();
+    $("header button").show();
     $("#search-dialog").hide();
 });
 
@@ -234,7 +234,7 @@ function render_catalog(results) {
     $("#name-search").prop("disabled", false);
     $("#coordinates-search").prop("disabled", false);
 
-    $("#catalog").html("<button id=\"back-to-search\" class=\"back\">←</button>");
+    $("#catalog").html("<button id=\"back-to-search\" class=\"back\">←</button><h3>Search Results</h3>");
     $("#catalog").show();
 
     $("#back-to-search").click(() => {
@@ -249,15 +249,28 @@ function render_catalog(results) {
     }
 
     results[0] = JSON.parse(results[0]);
+    $("#catalog").attr("data-results", JSON.stringify(results));
     console.log(results);
 
     var key = Object.keys(results[3])[0];
-    $("#catalog").append(`<table><thead><tr><th>${key}</th></thead><tbody></tbody></table>`);
+    $("#catalog").append(`<table><thead><tr><th>Displayed: ${key}</th></thead><tbody></tbody></table>`);
 
     for (var i = 0; i < results[3][key].length; i++) {
-        console.log(results[3][key][i]);
-        $("#catalog tbody").append(`<tr><td>${results[3][key][i]}</td></tr>`);
+        $("#catalog tbody").append(`<tr><td data-index="${i}">${results[3][key][i]}</td></tr>`);
     }
+
+    $("#catalog td").click(function() {
+        $("#catalog-result").show();
+        var results = JSON.parse($("#catalog").attr("data-results"));
+        console.log("fewfwefwe", results);
+        var index = $(this).attr("data-index");
+        var keys = Object.keys(results[0]);
+        $("#catalog-result").html(`<button id="close-catalog-result" class="close">x</button><ul></ul>`);
+        $("#close-catalog-result").click(() => $("#catalog-result").hide());
+        for (var i = 0; i < keys.length; i++) {
+            $("#catalog-result ul").append(`<li><b>${keys[i]}:</b> ${results[0][keys[i]][index]}</li>`);
+        }
+    });
 }
 
 $("#back-to-results").click(() => {

@@ -63,14 +63,14 @@ button:disabled {
     cursor: default;
 }
 
-#search-dialog {
+#search-dialog, #catalog-result {
     position: fixed;
     background-color: #000000;
     border: 2px solid #FFFFFF;
     border-radius: 4px;
     box-shadow: 0 0 10 rgba(0, 0, 0, 0.5);
     display: none;
-    min-height: 50%;
+    min-height: 40%;
     max-height: 90%;
     padding: 1em;
     width: min(45em, 90vw);
@@ -79,6 +79,10 @@ button:disabled {
     transform: translate(-50%, -50%);
     z-index: 100;
     overflow: auto;
+}
+
+#catalog-dialog {
+    z-index: 101;
 }
 
 #buttons {
@@ -94,7 +98,7 @@ button:disabled {
     display: none;
 }
 
-#buttons button, .bar button, #close {
+#buttons button, .bar button, .close {
     background-color: #FFFFFF;
     margin: 1em;
     padding: 15px 20px;
@@ -147,7 +151,7 @@ h2.exception {
     padding: 10px 15px;
 }
 
-#close, .back {
+.close, .back {
     background-color: #252525;
     box-shadow: 0 0 10px #000000;
     color: #FFFFFF;
@@ -203,8 +207,23 @@ h2.exception {
     font-size: .9em;
 }
 
-table {
-    margin-left: 2em;
+#catalog {
+    padding-left: 2em;
+}
+
+#catalog h3 {
+    margin-top: 0;
+}
+
+#catalog table td {
+    cursor: pointer;
+}
+
+#catalog-result ul {
+    color: #FFFFFF;
+    text-align: left;
+    list-style-type: none;
+    font-family: sans-serif;
 }
 
 #demo {
