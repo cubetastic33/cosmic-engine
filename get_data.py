@@ -133,7 +133,7 @@ def name_to_coords(obj_name):
     try:
         coords = SkyCoord.from_name(obj_name)
     except:
-        return None
+        return -1
 
     coords = coords.to_string('decimal').split(' ')
     coords = [float(i) for i in coords]
