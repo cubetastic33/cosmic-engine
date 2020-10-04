@@ -9,7 +9,7 @@ def index():
     return send_from_directory("templates", "index.html")
 
 
-@app.route("/fetch_catalogs", methods=["POST"])
+@app.route("/search_catalogs", methods=["POST"])
 def fetch_catalogs():
     return json.dumps([{"catalog_id": "foo", "title": "bar"}])
 

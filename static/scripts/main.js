@@ -210,7 +210,7 @@ $("#close").click(function() {
 });
 
 $("#buttons button").click(function() {
-    $.post("/fetch_catalogs", { type: $(this).text() }).done(function(result) {
+    $.post("/search_catalogs", { type: $(this).text(), query: "" }).done(function(result) {
         // TODO Populate #results with results
         $("#buttons").hide();
         $("#results").show();
