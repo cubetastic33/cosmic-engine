@@ -8,19 +8,167 @@ body {
     font-size: 18px;
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     margin: auto;
     padding: 0;
     display: inline-block;
-    /*max-width: 1440px;*/
     overflow: hidden;
 }
 
+header {
+    background-color: #00000044;
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    z-index: 100;
+}
+
+header div {
+    padding: 10px 0;
+    height: 100%;
+}
+
+header div button {
+    background-color: #FFFFFF44;
+    color: #FFFFFF;
+    height: 30px;
+}
+
+button {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#search-dialog {
+    position: fixed;
+    background-color: #000000;
+    border: 2px solid #FFFFFF;
+    border-radius: 4px;
+    box-shadow: 0 0 10 rgba(0, 0, 0, 0.5);
+    display: none;
+    min-height: 50%;
+    max-height: 90%;
+    padding: 1em;
+    width: min(45em, 90vw);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    overflow: auto;
+}
+
+#buttons {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+#search, #results {
+    display: none;
+}
+
+#buttons button, .bar button, #close {
+    background-color: #FFFFFF;
+    margin: 1em;
+    padding: 15px 20px;
+}
+
+#buttons button:hover {
+    opacity: .9;
+}
+
+h2 {
+    color: #FFFFFF;
+    margin: 0 0 1em 0;
+    font-family: sans-serif;
+}
+
+h2.exception {
+    margin: .5em 0 0 0;
+}
+
+.input label {
+    color: #FFFFFF;
+    font-family: sans-serif;
+}
+
+.input input {
+    background: transparent;
+    border: 2px solid #FFFFFF;
+    border-radius: 4px;
+    color: #FFFFFF;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+.bar button {
+    padding: 10px 15px;
+}
+
+#close, .back {
+    background-color: #252525;
+    box-shadow: 0 0 10px #000000;
+    color: #FFFFFF;
+    border-radius: 100%;
+    width: 1.7em;
+    height: 1.7em;
+    padding: 0 .5em;
+    font-size: 17px;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.back {
+    top: 1em;
+    left: 1em;
+}
+
+.input {
+    display: block;
+    width: 21em;
+    text-align: right;
+    margin: auto;
+}
+
+#results {
+    color: #FFFFFF;
+    text-align: left;
+    font-family: sans-serif;
+}
+
+.result {
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 1em;
+    margin: 1em 0;
+}
+
+.result:hover {
+    background-color: #0F0F0F;
+}
+
+.result h3 {
+    margin: 0;
+}
+
+.result a {
+    color: #8FBFF7;
+}
+
+.result p {
+    margin: .25em 0;
+    font-size: .9em;
+}
+
 #demo {
-    /* comment for fixed dimensions */
     position: relative;
-    /*width: 1440px;
-    height: 650px;*/
+    width: 100%;
+    height: 100%;
     margin: auto;
     overflow: hidden;
     cursor: move; /* fallback if grab cursor is unsupported */
@@ -33,4 +181,19 @@ body {
     cursor: grabbing;
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
+}
+
+@media only screen and (max-width: 442px) {
+    .bar, .input {
+        font-size: 75%;
+    }
+
+    .input input {
+        padding: 2px;
+        margin: 0 2px;
+    }
+
+    .input {
+        text-align: center;
+    }
 }

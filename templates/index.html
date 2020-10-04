@@ -7,9 +7,101 @@
     <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
-    <div id="demo">
-    </div>        
+    <header>
+        <div>
+            <button>VO Service</button>
+        </div>
+    </header>
+    <div id="search-dialog">
+        <button id="close">x</button>
+        <div id="buttons">
+            <button>Simple Cone Search</button>
+            <button>Simple Image Access Protocol</button>
+            <button>Simple Spectral Access</button>
+        </div>
+        <div id="results">
+            <button id="back-to-results" class="back">←</button>
+            <div class="result">
+                <h3>1. AAVSO International Variable Star Index</h3>
+                <p>
+                    <b>ID:</b> ivo://nasa.heasarc/aavsovsx
+                </p>
+                <p>
+                    <b>Title:</b> AAVSO International Variable Star Index
+                </p>
+                <p>
+                    <b>Short Name:</b> AAVSOVSX
+                </p>
+                <p>
+                    <b>Date:</b> 31 Jul 2020
+                </p>
+                <p>
+                    <b>Publisher:</b> NASA/GSFC HEASARC
+                </p>
+                <p>
+                    <b>Description:</b>
+                    This database table contains Galactic stars known or suspected to be variable. It lists all stars that have an entry in the American Association of Variable Star Observers&#39; (AAVSO) International Variable Star Index (VSX; <a href="http://www.aavso.org/vsx">http://www.aavso.org/vsx</a>). It consisted initially of the General Catalogue of Variable Stars (GCVS) and the New Catalogue of Suspected Variables (NSV) and was then supplemented with a large number of variable star catalogues, as well as individual variable star discoveries or variables found in the literature. Effort has also been invested to update the entries with the latest information regarding position, type and period and to remove duplicates. The VSX database is being continually updated and maintained. For historical reasons some objects outside of the Galaxy have been included.
+                </p>
+            </div>
+            <div class="result">
+                <h3>2. Abell Clusters</h3>
+                <p>
+                    <b>ID:</b> ivo://nasa.heasarc/abell
+                </p>
+                <p>
+                    <b>Title:</b> Abell Clusters
+                </p>
+                <p>
+                    <b>Short Name:</b> Abell
+                </p>
+                <p>
+                    <b>Date:</b> 31 Jul 2020
+                </p>
+                <p>
+                    <b>Publisher:</b> NASA/GSFC HEASARC
+                </p>
+                <p>
+                    <b>Description:</b>
+                    The ABELL database contains information from a catalog of clusters of galaxies, each having at least 30 members within the magnitude range m3 to m3+2 (m3 is the magnitude of the third brightest cluster member) and each with a nominal redshift less than 0.2. The database contains the revised Northern Abell catalog, the Southern Abell catalog, and the Supplementary Southern Abell catalog; the catalogs are published as tables 3, 4 and 5 of Abell, Corwin &amp; Orowin (1989).
+                </p>
+            </div>
+        </div>
+        <div id="search">
+            <button id="back-to-results" class="back">←</button>
+            <div class="input">
+                <label for="search-bar">Search Radius:</label>
+                <input id="search-bar" type="text">
+            </div>
+            <br>
+            <hr>
+            <div class="bar">
+                <h2 class="exception">Search by name</h2>
+                <br>
+                <div class="input">
+                    <label for="search-bar">Name:</label>
+                    <input id="search-bar" type="text">
+                </div>
+                <button id="name-search">Search</button>
+            </div>
+            <hr>
+            <div class="bar">
+                <h2>Search by coordinates</h2>
+                <div class="input">
+                    <label for="search-bar">Right Ascension:</label>
+                    <input id="search-bar" type="text">
+                </div>
+                <br>
+                <div class="input">
+                    <label for="search-bar">Declination:</label>
+                    <input id="search-bar" type="text">
+                </div>
+                <button id="coordinates-search">Search</button>
+            </div>
+        </div>
+    </div>
+    <div id="demo"></div>
 </body>
 <script src="/scripts/three.min.js"></script>
+<script src="/scripts/jquery-3.5.1.min.js"></script>
 <script src="/scripts/main.js"></script>
 </html>
