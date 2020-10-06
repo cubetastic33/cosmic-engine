@@ -219,7 +219,7 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-.result a, #catalog a {
+.result a, #catalog a, #catalog-result a {
     color: #8FBFF7 !important;
 }
 

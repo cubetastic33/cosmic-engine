@@ -263,14 +263,23 @@ function render_catalog(results) {
     $("#catalog td").click(function() {
         $("#catalog-result").show();
         var results = JSON.parse($("#catalog").attr("data-results"));
+        console.log("fewfwefwe", results);
         var index = $(this).attr("data-index");
         var keys = Object.keys(results[0]);
-        $("#catalog-result").html(`<button id="close-catalog-result" class="close">x</button>
-            <ul></ul>`);
+        var csv = keys.join(",") + "\n";
+        var values = [];
         $("#close-catalog-result").click(() => $("#catalog-result").hide());
+        $("#catalog-result").html("<button id=\"close-catalog-result\" class=\"close\">x</button><div></div><ul></ul>");
         for (var i = 0; i < keys.length; i++) {
             $("#catalog-result ul").append(`<li><b>${keys[i]}:</b> ${results[0][keys[i]][index]}</li>`);
+            // Populate the CSV file
+            values.push(results[0][keys[i]][index]);
         }
+        csv += values.join(",");
+        $("#catalog-result div").html(`
+            <a href="data:text/csv;charset=utf-8,${encodeURI(csv)}" target="_blank" download="catalog_result.csv">
+                Download as CSV
+            </a>`);
         $("#catalog-result").append(`<img src="${results[0]["URL"][index]}" alt="image">`);
     });
 }
