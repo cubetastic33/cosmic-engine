@@ -1,4 +1,4 @@
-var camera, scene, renderer;
+var camera, scene, renderer, mesh;
 var onPointerDownPointerX, onPointerDownPointerY, onPointerDownLon, onPointerDownLat;
 var element = document.getElementById("demo");
 var fov = 70; // Field of View
@@ -24,7 +24,7 @@ function init() {
     scene = new THREE.Scene();
 
     var geometry = new THREE.SphereGeometry(500, 60, 40);
-    var mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ map: texture }));
+    mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ map: texture }));
     mesh.scale.x = -1;
     scene.add(mesh);
 
@@ -103,7 +103,9 @@ $(".toggle").click(function() {
     var index = parseInt($(this).attr("data-toggle"));
     image[index] = (image[index] === "0") + 1 - 1;
     document.cookie = "start=" + image.join("") + ".jpg"
-    location.reload();
+    $("#demo").attr("data-start", image.join("") + ".jpg");
+    mesh.material.map = THREE.ImageUtils.loadTexture("/images/" + image.join("") + ".jpg");
+    mesh.material.needsUpdate = true;
 });
 
 $("#service").click(function() {
