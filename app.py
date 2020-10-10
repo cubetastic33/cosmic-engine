@@ -1,5 +1,5 @@
 import json
-from flask import Flask, send_from_directory, request
+from flask import Flask, send_from_directory, render_template, request
 
 import get_data
 
@@ -8,7 +8,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return send_from_directory("templates", "index.html")
+    start = request.cookies.get("start") or "000.jpg"
+    return render_template("index.html", start=start)
 
 
 @app.route("/search_catalogs", methods=["POST"])

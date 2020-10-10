@@ -14,7 +14,7 @@ var width = window.innerWidth;
 var height = window.innerHeight;
 var ratio = width / height;
 
-var texture = THREE.ImageUtils.loadTexture("/images/starmap.jpg", new THREE.UVMapping(), function() {
+var texture = THREE.ImageUtils.loadTexture("/images/" + $("#demo").attr("data-start"), new THREE.UVMapping(), function() {
     init();
     animate();
 });
@@ -98,13 +98,21 @@ function render() {
     renderer.render(scene, camera);
 }
 
-$("header button").click(function() {
+$(".toggle").click(function() {
+    var image = $("#demo").attr("data-start").split(".")[0].split("");
+    var index = parseInt($(this).attr("data-toggle"));
+    image[index] = (image[index] === "0") + 1 - 1;
+    document.cookie = "start=" + image.join("") + ".jpg"
+    location.reload();
+});
+
+$("#service").click(function() {
     $("#search-dialog").show();
-    $("header button").hide();
+    $("#service").hide();
 });
 
 $("#close").click(function() {
-    $("header button").show();
+    $("#service").show();
     $("#search-dialog").hide();
 });
 
