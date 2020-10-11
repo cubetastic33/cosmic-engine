@@ -101,7 +101,7 @@ function render() {
 $(".toggle").change(function() {
     var image = $("#demo").attr("data-start").split(".")[0].split("");
     var index = parseInt($(this).val());
-    image[index] = (image[index] === "0") + 1 - 1;
+    image[index] = ($(this).is(":checked")) + 1 - 1;
     document.cookie = "start=" + image.join("") + ".jpg"
     $("#demo").attr("data-start", image.join("") + ".jpg");
     mesh.material.map = THREE.ImageUtils.loadTexture("/images/" + image.join("") + ".jpg");
@@ -290,6 +290,10 @@ function render_catalog(results) {
             <a href="data:text/csv;charset=utf-8,${encodeURI(csv)}" target="_blank" download="catalog_result.csv">
                 Download as CSV
             </a>`);
+        $("#close-catalog-result").click(() => {
+            $("#catalog-result").empty();
+            $("#catalog-result").hide();
+        });
         $("#catalog-result").append(`<img src="${results[0]["URL"][index]}" alt="image">`);
     });
 }

@@ -16,7 +16,7 @@ def index():
         grid = " checked"
     if start[1] == "1":
         bounds = " checked"
-    if start[2] == "2":
+    if start[2] == "1":
         figures = " checked"
     return render_template("index.html", start=start, grid=grid, bounds=bounds, figures=figures)
 
