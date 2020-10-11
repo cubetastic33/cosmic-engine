@@ -9,7 +9,16 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     start = request.cookies.get("start") or "000.jpg"
-    return render_template("index.html", start=start)
+    grid = ""
+    bounds = ""
+    figures = ""
+    if start[0] == "1":
+        grid = " checked"
+    if start[1] == "1":
+        bounds = " checked"
+    if start[2] == "2":
+        figures = " checked"
+    return render_template("index.html", start=start, grid=grid, bounds=bounds, figures=figures)
 
 
 @app.route("/search_catalogs", methods=["POST"])

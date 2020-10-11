@@ -98,9 +98,9 @@ function render() {
     renderer.render(scene, camera);
 }
 
-$(".toggle").click(function() {
+$(".toggle").change(function() {
     var image = $("#demo").attr("data-start").split(".")[0].split("");
-    var index = parseInt($(this).attr("data-toggle"));
+    var index = parseInt($(this).val());
     image[index] = (image[index] === "0") + 1 - 1;
     document.cookie = "start=" + image.join("") + ".jpg"
     $("#demo").attr("data-start", image.join("") + ".jpg");

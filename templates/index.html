@@ -13,9 +13,6 @@
         <div id="time"></div>
         <div>
             <button id="service">VO Service</button>
-            <button class="toggle" data-toggle="0">grid</button>
-            <button class="toggle" data-toggle="1">bounds</button>
-            <button class="toggle" data-toggle="2">figures</button>
         </div>
         <h1>Cosmic Engine</h1>
         <img src="/images/logo.png" alt="logo">
@@ -69,6 +66,29 @@
         <div id="catalog"></div>
     </div>
     <div id="catalog-result"></div>
+    <div id="toggles">
+        <div>
+            <div>Grid</div>
+            <label class="switch">
+                <input type="checkbox" class="toggle" id="grid" value="0"{{ grid }}>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div>
+            <div>Bounds</div>
+            <label class="switch">
+                <input type="checkbox" class="toggle" id="bounds" value="1"{{ bounds }}>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div>
+            <div>Figures</div>
+            <label class="switch">
+                <input type="checkbox" class="toggle" id="figures" value="2"{{ figures }}>
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
     <div id="demo" data-start="{{ start }}"></div>
 </body>
 <script src="/scripts/three.min.js"></script>
