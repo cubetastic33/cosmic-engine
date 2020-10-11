@@ -76,6 +76,7 @@ button:disabled {
 #toggles {
     background-color: #00000044;
     bottom: 0;
+    font-size: .8em;
     right: 0;
     color: #FFFFFF;
     font-family: sans-serif;
