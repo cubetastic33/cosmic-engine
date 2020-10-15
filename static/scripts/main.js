@@ -264,7 +264,7 @@ function render_catalog(results) {
     console.log(results);
 
     var key = Object.keys(results[3])[0];
-    $("#catalog").append(`<a href="${results[2]}">Download raw XML</a><br><br><table><thead><tr><th>Displayed: ${key}</th></thead><tbody></tbody></table>`);
+    $("#catalog").append(`<a href="${results[2]}" target="_blank">Download raw XML</a><br><br><table><thead><tr><th>Displayed: ${key}</th></thead><tbody></tbody></table>`);
 
     for (var i = 0; i < results[3][key].length; i++) {
         $("#catalog tbody").append(`<tr><td data-index="${i}">${results[3][key][i]}</td></tr>`);
